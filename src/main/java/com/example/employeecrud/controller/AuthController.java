@@ -8,9 +8,10 @@ import com.example.employeecrud.dto.RegisterRequest;
 import com.example.employeecrud.entity.User;
 import com.example.employeecrud.repository.UserRepository;
 import com.example.employeecrud.security.JwtUtil;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*")
 @RestController
-@CrossOrigin("http://localhost:3000")
 @RequestMapping("/auth")
 public class AuthController {
 
