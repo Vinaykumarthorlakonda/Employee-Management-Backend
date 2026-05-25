@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.employeecrud.entity.Employee;
 import com.example.employeecrud.service.EmployeeService;
+import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
