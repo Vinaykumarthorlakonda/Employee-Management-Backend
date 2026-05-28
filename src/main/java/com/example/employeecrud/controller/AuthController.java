@@ -44,16 +44,29 @@ public class AuthController {
         return "User registered successfully";
     }
 
-    // LOGIN
-    @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
+   @PostMapping("/login")
+public String login(@RequestBody AuthRequest request) {
 
-        User user = userRepository.findByUsername(request.getUsername());
+    if (request == null ||
+        request.getUsername() == null ||
+        request.getPassword() == null) {
+        return "Invalid request body";
+    }
 
-        if (user != null && user.getPassword().equals(request.getPassword())) {
-            return jwtUtil.generateToken(user.getUsername());
-        }
+    User user = userRepository.findByUsername(request.getUsername());
 
+    if (user == null) {
         return "Invalid Credentials";
     }
+
+    if (user.getPassword() == null) {
+        return "User password not set in DB";
+    }
+
+    if (user.getPassword().equals(request.getPassword())) {
+        return jwtUtil.generateToken(user.getUsername());
+    }
+
+    return "Invalid Credentials";
+}
 }
